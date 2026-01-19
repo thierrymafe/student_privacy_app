@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Welcome, {{ user['name'] }}</h2>
+
+<h3>Your stored data</h3>
+<ul>
+    <li>Email: {{ user['email'] }}</li>
+    <li>Grade: {{ user['grade'] or 'not provided' }}</li>
+</ul>
+
+<h3>Privacy settings</h3>
+<form method="post">
+    <label>
+        <input type="checkbox" name="allow_analytics"
+               {% if user['allow_analytics'] %}checked{% endif %}>
+        Allow anonymous learning analytics
+    </label><br>
+    <label>
+        <input type="checkbox" name="show_in_classlist"
+               {% if user['show_in_classlist'] %}checked{% endif %}>
+        Show my name in class list
+    </label><br>
+    <button type="submit">Save settings</button>
+</form>
+
+<h3>Data control</h3>
+<p><a href="{{ url_for('download_data') }}">Download my data (JSON)</a></p>
+
+<form method="post" action="{{ url_for('request_deletion') }}">
+    <button type="submit">Request account deletion</button>
+</form>
+
+{% if user['deletion_requested'] %}
+<p><strong>You have requested to delete your account. however an admin still has to approve it.</strong></p>
+{% endif %}
+
+{% endblock %}
+
+
+

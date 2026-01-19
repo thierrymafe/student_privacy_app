@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Admin Dashboard</h2>
+
+<table border="1" cellpadding="6">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Grade</th>
+            <th>Allow Analytics</th>
+            <th>Show in Classlist</th>
+            <th>Deletion Requested</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in user %}
+    <tr>
+        <td>{{ user ['Name'] }}</td>
+        <td>{{ user ['email'] }}</td>
+        <td>{{ user ['grade'] }}</td>
+        <td>{{ 'Yes' if user['allow_analytics'] else 'No' }}</td>
+        <td>{{ 'Yes' if user['show_in_classlist'] else 'No' }}</td>
+        <td>{{ 'Yes' if user['deletion_requested'] else 'No' }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+
+

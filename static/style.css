@@ -1,0 +1,28 @@
+body {
+    font-family: Arial, "Times New Roman";
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+header {
+    margin-bottom: 1rem;
+}
+
+nav a {
+    margin-right: 10px;
+}
+
+.messages li {
+    list-style: none;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+.messages .error {
+    background-color: #f6f6f6;
+}
+
+.messages .success {
+    background-color: #91eeea;
+}
