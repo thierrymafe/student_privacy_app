@@ -261,6 +261,25 @@ def admin_dashboard():
 
     return render_template("admin_dashboard.html", users=users)
 
+@app.route("/admin/delete_user", methods=["POST"])
+def delete_user():
+    if not session.get("is_admin"):
+        flash("Admins only.","error")
+        return redirect(url_for("admin_login"))
+    user_id = request.form.get("user_id")
+    if not user_id:
+        flash("User ID not provided.", "error")
+        return redirect(url_for("admin_dashboard"))
+
+    connection = get_db()
+    cursor = connection.cursor()
+    cursor.execute("DELETE FROM user WHERE id = ?", (user_id,))
+    connection.commit()
+    connection.close()
+
+    flash("User account is deleted.", "Successfully")
+    return redirect(url_for("admin_dashboard"))
+
 
 if __name__ == "__main__":
     setup_db()

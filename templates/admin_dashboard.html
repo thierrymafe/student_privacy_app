@@ -1,8 +1,7 @@
-{% extends "base.html" %}
-{% block content %}
+
 <h2>Admin Dashboard</h2>
 
-<table border="1" cellpadding="6">
+<table border="1" >
     <thead>
         <tr>
             <th>Name</th>
@@ -18,14 +17,30 @@
     <tr>
         <td>{{ user ['Name'] }}</td>
         <td>{{ user ['email'] }}</td>
-        <td>{{ user ['grade'] }}</td>
+        <td>{{ user ['grade'] or 'N/A' }}</td>
         <td>{{ 'Yes' if user['allow_analytics'] else 'No' }}</td>
         <td>{{ 'Yes' if user['show_in_classlist'] else 'No' }}</td>
-        <td>{{ 'Yes' if user['deletion_requested'] else 'No' }}</td>
+        <td>
+            {{ 'Yes' if user['deletion_requested'] %}
+               <strong style="color:red;">Yes</strong>
+            {% else %}
+              No
+            {% endif %}
+        </td>
+        <td>
+        {%if user['deletion_requested'] %}
+            <form method="post" action="{{url_for('deletion_user') }}">
+                <input type="hidden" name="user_id" value="{{ user['id']}}">
+                <button type="submit">Approve Deletion</button>
+            </form>
+        {% else %}
+
+        {% endif %}
+        </td>
     </tr>
     {% endfor %}
     </tbody>
 </table>
-{% endblock %}
+
 
 
