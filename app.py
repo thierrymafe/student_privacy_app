@@ -51,6 +51,7 @@ def setup_db():
         )
     """)
 
+
     # default admin account (admin / admin26)
     admin_pw = generate_password_hash("admin26")
     cursor.execute(
