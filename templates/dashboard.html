@@ -2,7 +2,7 @@
 {% block content %}
 <h2>Welcome, {{ user['name'] }}</h2>
 
-<h3>Your stored data</h3>
+<h3>Your data</h3>
 <ul>
     <li>Email: {{ user['email'] }}</li>
     <li>Grade: {{ user['grade'] or 'not provided' }}</li>
@@ -13,7 +13,7 @@
     <label>
         <input type="checkbox" name="allow_analytics"
                {% if user['allow_analytics'] %}checked{% endif %}>
-        Allow anonymous learning analytics
+        Allow unknown learning analytics
     </label><br>
     <label>
         <input type="checkbox" name="show_in_classlist"
@@ -31,7 +31,7 @@
 </form>
 
 {% if user['deletion_requested'] %}
-<p><strong>You have requested to delete your account. however an admin still has to approve it.</strong></p>
+<p><strong>You have requested to delete your account. Please wait for admins approval. Thank You!</strong></p>
 {% endif %}
 
 {% endblock %}

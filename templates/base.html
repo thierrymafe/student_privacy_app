@@ -6,17 +6,20 @@
 </head>
 <body>
 <header>
-    <h1>Student Data Protection Demo</h1>
+    <h1>Student Data Prototype</h1>
     <nav>
         <a href="{{ url_for('index') }}">Home</a>
         {% if session.get('user_id') %}
         <a href="{{ url_for('dashboard') }}">Dashboard</a>
         <a href="{{ url_for('logout') }}">Logout</a>
+        {% elif session.get('is_admin') %}
+        <a href="{{ url_for('admin_dashboard') }}">Admin</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
         {% else %}
         <a href="{{ url_for('login') }}">Login</a>
         <a href="{{ url_for('register') }}">Register</a>
-        {% endif %}
         <a href="{{ url_for('admin_login') }}">Admin</a>
+        {% endif %}
     </nav>
 </header>
 
@@ -24,14 +27,22 @@
 {% if messages %}
 <ul class="messages">
     {% for category, message in messages %}
-    <li class="{{ category }}">{{ message }}</li>
+    <li class="flash {{ category }}">{{ message }}</li>
     {% endfor %}
-</ul>
+
 {% endif %}
 {% endwith %}
-
+</ul>
 <main>
     {% block content %}{% endblock %}
 </main>
 </body>
 </html>
+
+<script>
+
+    setTimeout(function () {
+        const flashMessages = document.querySelectorAll('.flash');
+        flashMessages.forEach(msg => msg.style.display = 'none');
+    }, 3000);
+</script>

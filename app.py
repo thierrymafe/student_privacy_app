@@ -278,7 +278,7 @@ def delete_user():
     connection.commit()
     connection.close()
 
-    flash("User account is deleted.", "Successfully")
+    flash("User account deleted successfully.", "Successfully")
     return redirect(url_for("admin_dashboard"))
 
 

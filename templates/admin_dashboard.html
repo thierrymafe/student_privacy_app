@@ -1,4 +1,5 @@
-
+{% extends "base.html" %}
+{% block content %}
 <h2>Admin Dashboard</h2>
 
 <table border="1" >
@@ -12,6 +13,7 @@
             <th>Deletion Requested</th>
         </tr>
     </thead>
+
     <tbody>
         {% for user in users %}
     <tr>
@@ -42,5 +44,5 @@
     </tbody>
 </table>
 
-
+{% endblock %}
 
