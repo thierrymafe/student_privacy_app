@@ -266,6 +266,7 @@ def delete_user():
     if not session.get("is_admin"):
         flash("Admins only.","error")
         return redirect(url_for("admin_login"))
+
     user_id = request.form.get("user_id")
     if not user_id:
         flash("User ID not provided.", "error")
@@ -273,7 +274,7 @@ def delete_user():
 
     connection = get_db()
     cursor = connection.cursor()
-    cursor.execute("DELETE FROM user WHERE id = ?", (user_id,))
+    cursor.execute("DELETE FROM users WHERE id = ?", (user_id,))
     connection.commit()
     connection.close()
 
